@@ -1,0 +1,45 @@
+TODO
+
+WORK-LIBRARY
+reread hiring document and take notes
+fill hours for work (add extra hours for this week)
+
+WORK-TUTOR
+email
+setup appointments and hours
+send jennifer thing about contacting students
+email students
+make handout for using microsoft office for students
+
+CODE
+vampire survivors online version
+
+EXERCISE
+walk
+
+OTHER
+
+https://staff-catalog.helmlib.org/
+helmstaff
+
+
+CLEAN UP
+scoop uninstall scoop
+rd -r \apps
+rd -r \home
+
+https://www.codecademy.com/paths/data-science/tracks/dscp-welcome-to-the-data-scientist-career-path/modules/dscp-welcome-to-the-data-scientist-career-path/informationals/dscp-intro-additional-resources
+
+https://hrcms-prod.mass.gov/
+502813
+standard all lower except middle: school
+
+aws ec2 amazon web services, elastic computing, elastic beanstalk: setup a linux server then ssh into it.
+
+process sample document fully using bash script + python?
+
+ADD TO REVIEW
+
+a, *b, c = [3, 6, 9, 12, 15]
+print(b) # >> [6, 9, 12]
+

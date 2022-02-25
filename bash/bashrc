@@ -1,0 +1,65 @@
+# Place in etc/bashrc or ~/.bashrc
+# source /c/home/user/.config/shell/bashrc
+
+# TODO 20220217213203  bash alias to add and commit then get status
+# TODO 20220217213212  bash change prompt to show git branch
+# TODO 20220217213228  bash create temporary jumps
+
+# misc
+
+## prompt
+PS1='\A \\$ '
+
+## paths
+
+### python pip installed scripts
+export PATH=$PATH:/c/apps/scoop/apps/python/current/Scripts
+
+## vim
+set -o vi # use vim mode
+bind -m vi-command 'Control-l: clear-screen' # ctrl+L to clear screen in vim mode
+bind -m vi-insert 'Control-l: clear-screen'
+
+## Tab behavior
+### Tab to cycle options
+bind '"\t":menu-complete'
+### Show options
+bind "set show-all-if-ambiguous on"
+### Ignore completion case
+bind "set completion-ignore-case on"
+### Cycle options only after first tab displays
+bind "set menu-complete-display-prefix on"
+
+
+# aliases
+
+## commands
+alias ll='ls -al'
+
+## directories
+alias startup='cd /c/Users/user/AppData/Roaming/Microsoft/Windows/Start\ Menu/Programs/Startup/ && ls'
+alias etc='cd /c/apps/scoop/apps/git/current/etc/ && ls'
+alias con='cd /c/home/user/.config/ && ls'
+alias docs='cd /c/home/user/docs/ && ls'
+alias code='cd /c/home/user/docs/code/ && ls'
+alias rev='cd /c/home/user/docs/code/projects/review/questions/ && ls'
+alias q='cd /c/home/user/docs/quests/ && ls'
+alias files='cd /c/home/user/files/ && ls'
+alias vibasic='vim -u /c/home/user/.config/vim/vimfiles/_vimrc_basic && ls'
+alias vimbasic='vim -u /c/home/user/.config/vim/vimfiles/_vimrc_basic && ls'
+alias vimrc='vim /c/home/user/.config/vim/vimfiles/_vimrc && ls'
+
+## git
+alias gs='git status'
+alias ga='git add'
+alias gaa='git add -A'
+alias gd='git diff'
+alias gc='git commit'
+
+## temporary directory jumps
+alias sz='z=`pwd` ; echo mark $z'
+alias jz='cd $z ; echo return to $z'
+alias sx='x=`pwd` ; echo mark $x'
+alias jx='cd $x ; echo return to $x'
+alias sc='c=`pwd` ; echo mark $c'
+alias jc='cd $c ; echo return to $c'

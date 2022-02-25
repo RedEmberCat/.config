@@ -1,0 +1,8 @@
+echo '"\C-i": menu-complete' >> ~/.inputrc
+echo '"\e[Z": menu-complete-backward' >> ~/.inputrc
+echo 'set show-all-if-ambiguous on' >> ~/.inputrc
+echo '"\C-k":history-search-backward' >> ~/.inputrc
+echo '"\C-j":history-search-forward ' >> ~/.inputrc
+echo 'set -o vi' >> ~/.bashrc
+echo "bind -m vi-command 'Control-l: clear-screen'" >> ~/.bashrc
+echo "bind -m vi-insert 'Control-l: clear-screen'" >> ~/.bashrc

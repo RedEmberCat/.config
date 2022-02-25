@@ -1,0 +1,51 @@
+# 07-01
+
+## notes
+
+derivative product rule
+
+    (fg)' = fg' + f'g
+
+integration by parts is the reverse
+
+    ∫ (fg' + f'g) dx = fg
+
+QUESTION
+    how does f' notation become df?
+    and where is the + c?
+
+faster notation
+
+    ∫ fg' + ∫ f'g = fg
+    ∫ fg' = fg - ∫ f'g
+
+### problem -1
+eval
+
+    I = ∫ x sinx dx
+
+ibp
+
+    ∫ (fg' + f'g)    = fg            f    = x        g'    = sinx dx
+    ∫ fg'            = fg - ∫ f'g    f'    = dx    g    = -cosx
+
+solve
+
+    I    = -x cosx - ∫ -cosx dx
+        = -x cosx + sinx + c
+
+### problem -2
+eval
+
+    I = ∫ ln x dx
+
+ibp
+
+    ∫ (fg' + f'g)    = fg                f    = ln x        g'    = dx
+    ∫ fg'            = fg - ∫ f'g        f'    = 1/x dx    g    = x
+
+solve
+
+    I    = x ln x - ∫ x/x dx
+        = x ln x - ∫ dx
+        = x ln x - x + c

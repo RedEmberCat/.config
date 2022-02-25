@@ -1,0 +1,26 @@
+" Basics
+set nocompatible " improve a variety of vim backend behaviors
+set autochdir  " Follow buffer directory
+set autoread  " Update files when they change
+set autowrite  " Autosave
+set autowriteall  " Autosave on buffer switch
+
+" Directory variables
+let g:head =  has('windows') && has('unix') ? '/c' : ''
+let g:docsdir = g:head . '/home/user/docs/'
+let g:vimfilesdir = g:head . '/home/user/.config/vim/vimfiles/'
+
+" Source vim config files
+let files = [
+	\ 'codecademy.vim',
+	\ 'cosmetics.vim',
+	\ 'misc.vim',
+	\ 'paths.vim',
+	\ 'saving.vim',
+	\ 'tabs.vim',
+	\ 'terminal.vim',
+	\ 'utilities.vim',
+\]
+for file in files
+	execute 'source' g:vimfilesdir . file
+endfor

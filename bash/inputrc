@@ -1,0 +1,13 @@
+# Place in etc/inputrc or ~/.inputrc
+# $include /c/home/user/.config/shell/inputrc
+
+# Vim-like tab-completion
+"\C-i": menu-complete
+"\e[Z": menu-complete-backward
+
+set show-all-if-ambiguous on # Show matching
+"\C-k":history-search-backward # ssh<c-k> searches history beginning with ssh
+"\C-j":history-search-forward
+
+# none, visible or audible
+set bell-style visible

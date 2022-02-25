@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Script to convert EZProxy .log files to .csv files
+#
+# Use: ./ezp2csv input_directory/ output_directory/
+# Estimated speed: 20 MB per minute or better
+
+# parameters
+# $1 input_directory
+# $2 output_directory
+
+
+
+main() {
+    for file in $1*.log; do
+        filename=`basename $file .log`
+        newfile=$2$filename.csv
+        cp -- $file $newfile
+        vim -S commands.vim $newfile
+        echo "$file -> $newfile"
+    done
+}
+
+help() {
+    echo HELP TEXT
+    echo Script to convert EZProxy .log files to .csv files
+    echo
+    echo Use: ./ezp2csv input_directory/ output_directory/
+    echo Estimated speed: 20 MB per minute or better
+}
+
+# Make vim commands file to convert to csv
+cat > commands.vim << EOL
+let g:commands = join([
+    \ 'normal ',
+    \ 'vip:''<,''>normal 0',
+    \ 'f r,',
+    \ 'f r,',
+    \ 'f r,',
+    \ 'f]lr,',
+    \ '2f"lr,',
+    \ 'f r,',
+    \ "\<cr>",
+\ ], '')
+execute g:commands
+xa
+EOL
+
+# Run script if two arguments are given, otherwise display help
+[ $# -eq 2 ] && main $1 $2 || help
+rm commands.vim

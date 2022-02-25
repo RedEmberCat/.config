@@ -1,0 +1,137 @@
+" Saving
+
+" Basics
+set nocompatible " improve a variety of vim backend behaviors
+set autochdir  " Follow buffer directory
+set autoread  " Update files when they change
+set autowrite  " Autosave
+set autowriteall  " Autosave on buffer switch
+
+" When running this vimrc without the extra files loaded at the bottom, these
+" settings are convenient.
+set nobackup " No backup files
+set noswapfile " No swap files
+set noundofile  " No undo files
+
+
+" Cosmetics
+
+" Encoding
+scriptencoding utf-8
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,latin1
+set termencoding=utf-8
+
+" Misc
+set noshowmode " Hides Insert/Replace/Visual indicator.
+set visualbell " Changes audio cues to visual
+
+" Tabs, whitespace, special characters
+set tabstop=4 " Width of tab character
+set shiftwidth=4 " Width of > command
+set autoindent " Indent newlines properly
+set expandtab " Change tabs to spaces
+set backspace=indent,eol,start " Backspace works through boundaries
+set listchars=tab:¸\ ,trail:_,extends:>,precedes:<
+let &showbreak='	'
+set list
+
+" Windows and panes
+set fillchars=vert:\ ,fold:\ ,
+set cmdheight=1 " Prevent press ENTER to continue messages (?)
+set cmdwinheight=4 " Keep small <c-f> window
+set splitbelow " Make new panes appear below
+set laststatus=2 " Show status line
+
+" Lines and columns
+set splitright " Make new panes appear to the right
+set numberwidth=1 " Use smallest numbering gutter
+set colorcolumn=81 " Mark nth column. Write to the (n-1)th column
+set cursorline " Highlight current line
+set cursorcolumn " Highlight current column
+set noruler " Hide line/col at bottom right
+set number " Show line numbers
+set relativenumber " Show relative line numbers
+set nowrap
+
+" Colors and heighlighting
+colorscheme slate
+filetype plugin on
+syntax on
+syntax enable
+
+
+" Misc
+
+" Make Y act like C and D, which I prefer.
+" Reason for inconsitency: https://vi.stackexchange.com/a/6135
+nnoremap Y y$
+
+" Switch delimeters
+nnoremap <leader>( mz%%r)r(`z
+nnoremap <leader>[ mz%%r]r[`z
+nnoremap <leader>{ mz%%r}r{`z
+nnoremap <leader>' :call SwitchQuotes()<cr>
+function! SwitchQuotes()
+    normal mz
+    let type = search('"', '', line('.')) ? 0 : 1
+    if type
+        silent! normal! f'r",r"
+    else
+        " The next two lines doesn't work on one line for some reason
+        silent! normal! f"
+        silent! normal! r',r'
+    endif
+    normal `z
+endfunction
+
+
+" Paths
+
+" cd quickly to directories or files
+cnoremap so;    silent! w<cr>:source	/c/home/user/.config/vim/vimfiles/_vimrc<cr>
+cnoremap vi;	cd		/c/home/user/.config/vim/vimfiles<cr>:e <c-d>
+cnoremap con;	cd		/c/home/user/.config/<cr>:e <c-d>
+cnoremap rev;	cd		/c/home/user/docs/code/projects/review/questions<cr>:e <c-d>
+cnoremap rev;	cd		/c/home/user/docs/code/projects/review/questions<cr>:e <c-d>
+cnoremap q;		cd		/c/home/user/docs/quests<cr>:e <c-d>
+
+" Quick fix navigation
+nnoremap <c-j> :cn<cr>zz
+nnoremap <c-k> :cp<cr>zz
+
+
+" Terminal
+
+set termwinkey=<c-e>
+
+augroup terminalcommands
+	autocmd!
+
+	" Close terminals
+	nnoremap <s-cr> :call CloseTerminals()<cr>
+	tnoremap <s-cr> <c-w>:call CloseTerminals()<cr>
+
+	" Run code
+	autocmd Filetype python nnoremap <buffer> <cr> :w<cr>:call Run()<cr>
+
+augroup END
+
+function! Run()
+	normal mz
+	call CloseTerminals()
+    vert ter python %
+    wincmd p
+    normal `z
+endfunction
+
+function! CloseTerminals()
+	let terminals = split(execute('filter/!/ls'), '\n')
+	if !len(terminals)
+		return
+	else
+		for i in range(len(terminals))
+			silent! execute "bd!" split(terminals[i], ' ')[0]
+		endfor
+	endif
+endfunction
